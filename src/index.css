@@ -1,0 +1,285 @@
+.playerContainer {
+  padding: 1rem;
+}
+
+.playerContainer.purple {
+  background: linear-gradient(90deg, #4b36d0, #5536d0 66%, #5c2bf1 101%);
+  border-radius: 5px;
+  border: 1px solid #5e5e5e;
+  box-shadow: 2px 2px 3px 0px #00000070;
+}
+
+.playerContainer.white {
+  background: linear-gradient(90deg, #ffffff, #f1f1f1 66%, #ffffff 101%);
+  border-radius: 5px;
+  border: 1px solid #5e5e5e;
+  box-shadow: 2px 2px 3px 0px #00000070;
+  color: black;
+}
+
+#controls {
+  width: 80px;
+}
+
+#playButton {
+  background: url('./icons/play.svg') center center / contain no-repeat;
+  background-size: contain;
+  border: none;
+  cursor: pointer;
+}
+
+.playerInfo {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.playerInfo > :last-child {
+  margin-left: auto;
+}
+
+.noFlash {
+  /* https://stackoverflow.com/questions/21003535/anyway-to-prevent-the-blue-highlighting-of-elements-in-chrome-when-clicking-quic */
+  /* To prevent blue divbox flashing upon touch on touchscreens */
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.noFlash:focus {
+  outline: none !important;
+}
+
+.noTouchAction {
+  touch-action: none;
+}
+
+.barContainer {
+  display: flex;
+  align-items: center;
+}
+
+.barContainer span {
+  padding: 0 0.5rem 0;
+}
+
+.bars {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.bar {
+  position: absolute;
+  left: 0;
+  height: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.progress {
+  z-index: 3;
+
+  width: 100%;
+  transform: translate(-100%, -50%);
+
+  background-color: #ff3232;
+}
+
+.buffer {
+  z-index: 2;
+  width: 0%;
+  background-color: rgb(43, 43, 43);
+}
+
+.norm {
+  z-index: 1;
+  width: 100%;
+  background-color: rgb(100, 100, 100);
+}
+
+#barHolder {
+  flex-grow: 1;
+  cursor: pointer;
+  height: 16px;
+  background-color: rgba(0, 0, 0, 0);
+  position: relative;
+}
+
+#circleHolder {
+  cursor: pointer;
+  width: 8px;
+  height: 8px;
+
+  position: absolute;
+  z-index: 4;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#circleHolder .circle {
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  border-radius: 50%;
+  background-color: #ff3232;
+  box-shadow: 1px solid black;
+}
+
+.barContainer:hover #circleHolder .circle {
+  opacity: 1;
+}
+
+#circleHolder .circle:hover {
+  transform: scale(1.05);
+  box-shadow: 1px 1px 3px #424242;
+}
+
+#circleHolder .circle.display {
+  transform: scale(1.05);
+  box-shadow: 1px 1px 3px #424242;
+  opacity: 1;
+}
+
+#cancelSeek.display {
+  display: flex;
+  opacity: 1;
+}
+
+#cancelSeek {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 4px;
+  padding: 3px;
+  box-shadow: 1px 1px 2px black;
+
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -150%);
+
+  opacity: 1;
+  display: none;
+}
+
+#cancelSeek span {
+  z-index: 5;
+  pointer-events: none;
+}
+
+#cancelSeek .button {
+  width: 2rem;
+  height: 2rem;
+  background: url('./icons/cancel.svg') center center / contain no-repeat;
+  background-size: 130%;
+  border-radius: 50%;
+  border: 1px solid black;
+  box-shadow: 1px 1px 2px black;
+  z-index: 2;
+}
+
+#cancelSeek .dropOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  background-color: #3dc92bd6;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+#cancelSeek:hover .dropOverlay {
+  background-color: #ff3b48d6;
+}
+
+#cancelSeek .dropOverlay:hover {
+  background-color: #3dc92bd6;
+}
+
+#cancelSeek.cancel .dropOverlay {
+  background-color: #ff3b48d6;
+}
+
+@media screen and (max-width: 720px) {
+  #circleHolder .circle {
+    opacity: 1;
+  }
+
+  #cancelSeek {
+    transition: none;
+  }
+
+  #cancelSeek span {
+    font-size: 1.2rem;
+  }
+
+  #cancelSeek .button {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+}
+
+#progress {
+  height: 4px;
+  position: relative;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+#bar {
+  height: 100%;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: green;
+  width: 0;
+}
+
+#buffered-amount {
+  position: absolute;
+  height: 100%;
+  z-index: 0;
+  background-color: #777;
+  width: 0;
+}
+
+.audioControls {
+  max-width: 24rem;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.controlsContainer > * {
+  width: 2.2rem;
+  height: 2.2rem;
+  object-fit: cover;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.audioButton.close.expanded {
+  transform: rotate(0deg);
+}
+
+.audioButton {
+  cursor: pointer;
+  height: 32px;
+  width: 32px;
+}
+
+.audioButton img {
+  width: 100%;
+  height: 100%;
+}
